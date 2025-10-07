@@ -1,0 +1,881 @@
+set cut_paste_input [stack 0]
+
+push 0
+push $cut_paste_input
+Group {
+ inputs 2
+ name AdditiveKeyer_Careta
+ tile_color 0x1f4c14ff
+ note_font_size 21
+ selected true
+ xpos 85
+ ypos 166
+ addUserKnob {20 FG l ForeGround}
+ addUserKnob {26 text_1 l "" +STARTLINE T "\n"}
+ addUserKnob {26 text l "" +STARTLINE T "Set all RGB values to\n0 using the knobs in despill.\n                                          - by Careta"}
+ addUserKnob {26 text_2 l "" +STARTLINE T "\n"}
+ addUserKnob {4 Viewer_Option l Viewer M {Final Despill Luma ""}}
+ addUserKnob {26 text_3 l "" +STARTLINE T "\n"}
+ addUserKnob {26 ""}
+ addUserKnob {20 group l Despill n 1}
+ addUserKnob {41 back_color l screenColor T PxF_KillSpill.back_color}
+ addUserKnob {26 ""}
+ addUserKnob {20 group_7 l DespillSettings n 1}
+ addUserKnob {26 text_12 l "@b;Range"}
+ addUserKnob {41 supp l suppression T PxF_KillSpill.supp}
+ addUserKnob {41 masterMult l Limiter T PxF_KillSpill.masterMult}
+ addUserKnob {26 ""}
+ addUserKnob {41 SpillTweak l Equal T PxF_KillSpill.SpillTweak}
+ addUserKnob {20 endGroup_7 l endGroup n -1}
+ addUserKnob {26 ""}
+ addUserKnob {20 group_5 l AutoEqual n 1}
+ group_5 0
+ addUserKnob {6 ViewRegion +STARTLINE}
+ addUserKnob {41 AutoColor -STARTLINE T PxF_KillSpill.AutoColor}
+ addUserKnob {41 box l CropRegion T Selecter.box}
+ addUserKnob {26 ""}
+ addUserKnob {20 group_6 l BlurInicial n 1}
+ group_6 0
+ addUserKnob {26 text_1_1 l "" +STARTLINE T "\n"}
+ addUserKnob {41 size_1 l Blur T Selecter.size}
+ addUserKnob {26 text_2_1 l "" +STARTLINE T "\n"}
+ addUserKnob {20 endGroup_6 l endGroup n -1}
+ addUserKnob {26 ""}
+ addUserKnob {20 group_1_1 l FinalBlur n 1}
+ group_1_1 0
+ addUserKnob {26 text_3_1 l "" +STARTLINE T "\n"}
+ addUserKnob {41 size_1_1 l Big_Blur T Selecter.size_1}
+ addUserKnob {26 text_4_1 l "" +STARTLINE T "\n"}
+ addUserKnob {41 white_3 l gain_Correct T Selecter.white}
+ addUserKnob {20 endGroup_1_1 l endGroup n -1}
+ addUserKnob {26 ""}
+ addUserKnob {20 endGroup_5 l endGroup n -1}
+ addUserKnob {26 ""}
+ addUserKnob {20 endGroup n -1}
+ addUserKnob {26 text_11 l "" +STARTLINE T "\n"}
+ addUserKnob {26 ""}
+ addUserKnob {20 group_1 l Grade n 1}
+ group_1 0
+ addUserKnob {41 white l gain T Grade1.white}
+ addUserKnob {41 multiply T Grade1.multiply}
+ addUserKnob {26 ""}
+ addUserKnob {41 add l offset T Grade1.add}
+ addUserKnob {41 gamma T Grade1.gamma}
+ addUserKnob {20 endGroup_1 l endGroup n -1}
+ addUserKnob {26 ""}
+ addUserKnob {20 tab l BackGround}
+ addUserKnob {26 text_6 l "" +STARTLINE T "\n\n"}
+ addUserKnob {26 text_8 l "" +STARTLINE T "Match the light and shadow\nvalues through the\nkeyer with the original BG.\n"}
+ addUserKnob {26 text_9 l "" +STARTLINE T "\n"}
+ addUserKnob {26 ""}
+ addUserKnob {20 group_2 l LumaOptions n 1}
+ addUserKnob {4 ViewLuminance l View M {Final Luminance Blurred ""}}
+ addUserKnob {26 ""}
+ addUserKnob {26 text_4 l "@b;Limiter" T "\n"}
+ addUserKnob {41 blackpoint T Grade2.blackpoint}
+ addUserKnob {41 whitepoint T Grade2.whitepoint}
+ addUserKnob {26 ""}
+ addUserKnob {26 text_5 l "@b;Blur" T "\n"}
+ addUserKnob {41 size T Blur1.size}
+ addUserKnob {20 endGroup_2 l endGroup n -1}
+ addUserKnob {26 ""}
+ addUserKnob {20 group_3 l LightFIX n 1}
+ group_3 0
+ addUserKnob {26 text_7 l "@b;LightOptions" T "\n"}
+ addUserKnob {41 white_1 l gain T Light.white}
+ addUserKnob {41 multiply_1 l multiply T Light.multiply}
+ addUserKnob {26 ""}
+ addUserKnob {41 add_1 l offset T Light.add}
+ addUserKnob {41 gamma_1 l gamma T Light.gamma}
+ addUserKnob {20 endGroup_3 l endGroup n -1}
+ addUserKnob {26 ""}
+ addUserKnob {20 group_4 l ShadowFIX n 1}
+ group_4 0
+ addUserKnob {26 text_10 l "@b;ShadowOptions" T "\n"}
+ addUserKnob {41 white_2 l gain T Shadow.white}
+ addUserKnob {41 multiply_2 l multiply T Shadow.multiply}
+ addUserKnob {26 ""}
+ addUserKnob {41 add_2 l offset T Shadow.add}
+ addUserKnob {41 gamma_2 l gamma T Shadow.gamma}
+ addUserKnob {20 endGroup_4 l endGroup n -1}
+ addUserKnob {26 ""}
+}
+ BackdropNode {
+  inputs 0
+  name BackdropNode1
+  tile_color 0x161616ff
+  label <center>LUMA
+  note_font "Verdana Bold Italic"
+  note_font_size 42
+  xpos 320
+  ypos -459
+  appearance Border
+  bdwidth 455
+  bdheight 582
+ }
+ BackdropNode {
+  inputs 0
+  name BackdropNode2
+  tile_color 0x161616ff
+  label <center>GradeFG
+  note_font "Verdana Bold Italic"
+  note_font_size 42
+  xpos -183
+  ypos 609
+  appearance Border
+  bdwidth 384
+  bdheight 328
+ }
+ BackdropNode {
+  inputs 0
+  name BackdropNode3
+  tile_color 0x161616ff
+  label <center>REVEAL
+  note_font "Verdana Bold Italic"
+  note_font_size 42
+  xpos 1314
+  ypos -1037
+  appearance Border
+  bdwidth 399
+  bdheight 313
+ }
+ BackdropNode {
+  inputs 0
+  name BackdropNode4
+  tile_color 0x161616ff
+  label <center>despill
+  note_font "Verdana Bold Italic"
+  note_font_size 42
+  xpos 111
+  ypos -1383
+  appearance Border
+  bdwidth 618
+  bdheight 706
+ }
+ BackdropNode {
+  inputs 0
+  name BackdropNode5
+  tile_color 0x161616ff
+  label <center>LightFIX
+  note_font "Verdana Bold Italic"
+  note_font_size 42
+  xpos 1328
+  ypos -627
+  appearance Border
+  bdwidth 542
+  bdheight 838
+ }
+ BackdropNode {
+  inputs 0
+  name BackdropNode6
+  tile_color 0x161616ff
+  label <center>ViewerOptions
+  note_font "Verdana Bold Italic"
+  note_font_size 42
+  xpos 1000
+  ypos 1436
+  appearance Border
+  bdwidth 1033
+  bdheight 620
+ }
+ StickyNote {
+  inputs 0
+  name StickyNote2
+  tile_color 0xff
+  label "<- BG"
+  note_font "Verdana Bold Italic"
+  note_font_size 41
+  xpos 1558
+  ypos -1541
+ }
+ StickyNote {
+  inputs 0
+  name StickyNote1
+  tile_color 0xff
+  label "<- Input"
+  note_font "Verdana Bold Italic"
+  note_font_size 41
+  xpos 594
+  ypos -1537
+ }
+ Input {
+  inputs 0
+  name FG
+  xpos 517
+  ypos -1615
+  number 1
+ }
+ Dot {
+  name Dot4
+  xpos 551
+  ypos -1512
+ }
+ Dot {
+  name Dot1
+  xpos 551
+  ypos -1147
+ }
+set Ncf059400 [stack 0]
+ Dot {
+  name Dot3
+  xpos 364
+  ypos -1147
+ }
+set Ncf059800 [stack 0]
+ Group {
+  name Selecter
+  tile_color 0xdfff00ff
+  xpos 194
+  ypos -1050
+  addUserKnob {20 tab}
+  addUserKnob {26 text l "" +STARTLINE T "\nAqui é um grupo para\nExtrair somente a cor da regiao\n\n"}
+  addUserKnob {26 ""}
+  addUserKnob {20 group l BlurInicial n 1}
+  group 0
+  addUserKnob {26 text_1 l "" +STARTLINE T "\n"}
+  addUserKnob {41 size l Blur T Blur2.size}
+  addUserKnob {26 text_2 l "" +STARTLINE T "\n"}
+  addUserKnob {41 box l CropRegion T Crop1.box}
+  addUserKnob {20 endGroup n -1}
+  addUserKnob {26 ""}
+  addUserKnob {20 group_1 l FinalBlur n 1}
+  addUserKnob {26 text_3 l "" +STARTLINE T "\n"}
+  addUserKnob {41 size_1 l Big_Blur T Blur3.size}
+  addUserKnob {26 text_4 l "" +STARTLINE T "\n"}
+  addUserKnob {41 white l gain_Correct T Grade3.white}
+  addUserKnob {20 endGroup_1 l endGroup n -1}
+ }
+  Input {
+   inputs 0
+   name Input1
+   xpos 271
+   ypos -290
+  }
+  Shuffle2 {
+   fromInput1 {{0} B}
+   fromInput2 {{0} B}
+   mappings "4 rgba.red 0 0 rgba.red 0 0 rgba.green 0 1 rgba.green 0 1 rgba.blue 0 2 rgba.blue 0 2 white -1 -1 rgba.alpha 0 3"
+   name Shuffle1
+   xpos 271
+   ypos -266
+  }
+  Blur {
+   size 20
+   name Blur2
+   xpos 271
+   ypos -210
+  }
+  Crop {
+   box {2854 1563.5 3746 2036.5}
+   reformat true
+   crop false
+   name Crop1
+   xpos 271
+   ypos -156
+  }
+  Reformat {
+   name Reformat1
+   xpos 271
+   ypos -132
+  }
+  Blur {
+   size 1000
+   name Blur3
+   xpos 271
+   ypos -58
+  }
+  Grade {
+   white 1.05
+   name Grade3
+   xpos 271
+   ypos 17
+  }
+set Nd1a39800 [stack 0]
+  Output {
+   name Output1
+   xpos 271
+   ypos 117
+  }
+push $Nd1a39800
+  Viewer {
+   frame_range 100-134
+   monitorOutNDISenderName "NukeX - pluginzinho - Viewer1"
+   name Viewer1
+   xpos 680
+   ypos -156
+  }
+ end_group
+push $Ncf059800
+ Switch {
+  inputs 2
+  which {{parent.ViewRegion}}
+  name ViewRegion
+  xpos 330
+  ypos -934
+ }
+ Group {
+  name PxF_KillSpill
+  help "Remove red/green/blue spill."
+  tile_color 0x733520ff
+  xpos 330
+  ypos -833
+  addUserKnob {20 PxF_KillSpill}
+  addUserKnob {4 back_color l screenColor t "Which type of spill to remove." M {red green blue "" "" "" "" "" "" ""}}
+  back_color green
+  addUserKnob {7 supp l suppression t "Bias the mix of channels used to cap the 'spill' channel.\nFor example when removing 'green spill':\n0 = green channel is capped by the red channel.\n\n0.5 = green channel is capped by half-mix of red and blue channels.\n\n1 = green channel is capped by the blue channel." R -1 2}
+  supp 0.5
+  addUserKnob {7 masterMult l limiter t "Gain applied to the 'cap' channel to make the suppression more or less aggressive." R 0 10}
+  masterMult 0.75
+  addUserKnob {18 SpillTweak l spillTweak t "Adjust the luminance and color of the spill areas." R -10 10}
+  SpillTweak {0 0 0}
+  addUserKnob {6 SpillTweak_panelDropped l "panel dropped state" -STARTLINE +HIDDEN}
+  SpillTweak_panelDropped true
+  addUserKnob {7 mix t "Dissolve between the original (0) and the full effect (1)."}
+  mix 1
+  addUserKnob {26 text l "" +STARTLINE T "\n\n\n\n\n"}
+  addUserKnob {22 AutoColor T "# PYTHON BUTTON — calcula spillTweak com a SUA regra e garantindo medir com spillTweak=0\n# - Amostra uma grade no FORMAT do PRÓPRIO node (não usa ROI/bbox do Viewer)\n# - Desliga temporariamente qualquer ROI de Viewers para evitar erro de contexto\n# - Força a medição com spillTweak = (0,0,0)\n# - Fórmula final por canal: spillTweak = -(mean_channel / 0.25)\n\nimport nuke, random\n\nFACTOR = 0.25    # seu divisor fixo (=> resultado é -mean/0.25)\nGRID   = 128      # densidade da amostragem (NxN). Aumente p/ maior precisão.\n\n# ----------------- utilidades -----------------\ndef _disable_all_viewer_rois():\n    states = \[]\n    for v in nuke.allNodes('Viewer'):\n        st = \{'node': v\}\n        try:\n            st\['has_box'] = 'box' in v.knobs()\n            st\['box'] = tuple(v\['box'].value()) if st\['has_box'] else None\n            st\['has_en'] = 'box_enabled' in v.knobs()\n            st\['en'] = bool(v\['box_enabled'].value()) if st\['has_en'] else None\n            if st\['has_en']:\n                v\['box_enabled'].setValue(False)\n            if st\['has_box']:\n                v\['box'].setValue((0,0,0,0))\n        except Exception:\n            pass\n        states.append(st)\n    return states\n\ndef _restore_viewer_rois(states):\n    for st in states:\n        v = st\['node']\n        try:\n            if st.get('has_box') and st.get('box') is not None:\n                v\['box'].setValue(st\['box'])\n            if st.get('has_en') and st.get('en') is not None:\n                v\['box_enabled'].setValue(st\['en'])\n        except Exception:\n            pass\n\ndef _find_spill_knob(node):\n    # tenta um knob vetorial\n    for name in ('spillTweak','SpillTweak','spilltweak','Spilltweak','equal','equalize'):\n        if name in node.knobs():\n            k = node\[name]\n            # retorna getter/setter padronizados\n            return name, (\n                lambda: (k.getValue(0), k.getValue(1), k.getValue(2)),\n                lambda r,g,b: (k.setValue(float(r),0), k.setValue(float(g),1), k.setValue(float(b),2))\n            )\n    # tenta três knobs escalares\n    for rn,gn,bn in (('tweakR','tweakG','tweakB'),\n                     ('equal_r','equal_g','equal_b'),\n                     ('Spill_tweak_r','Spill_tweak_g','Spill_tweak_b'),\n                     ('R','G','B')):\n        if rn in node.knobs() and gn in node.knobs() and bn in node.knobs():\n            return (rn,gn,bn), (\n                lambda: (node\[rn].value(), node\[gn].value(), node\[bn].value()),\n                lambda r,g,b: (node\[rn].setValue(float(r)),\n                               node\[gn].setValue(float(g)),\n                               node\[bn].setValue(float(b)))\n            )\n    return None, (None, None)\n\ndef _mean_rgb_over_format(node, frame=None, grid=GRID, use_alpha_mask=False):\n    \"\"\"Amostra grade regular em coordenadas do FORMAT do node (independe do Viewer).\"\"\"\n    if frame is None:\n        frame = nuke.frame()\n    fmt = node.format()\n    W, H = fmt.width(), fmt.height()\n    nx = max(2, int(grid)); ny = max(2, int(grid))\n\n    # posições ficam estritamente dentro de \[0.5, W-0.5] e \[0.5, H-0.5]\n    def pos_x(ix): return 0.5 + (ix + 0.5) * (W - 1.0) / nx\n    def pos_y(iy): return 0.5 + (iy + 0.5) * (H - 1.0) / ny\n\n    rng = random.Random(1337)\n    acc_r = acc_g = acc_b = 0.0\n    cnt = 0\n\n    for iy in range(ny):\n        sy = pos_y(iy) + (rng.random() - 0.5) * 0.25\n        for ix in range(nx):\n            sx = pos_x(ix) + (rng.random() - 0.5) * 0.25\n            try:\n                if use_alpha_mask:\n                    try:\n                        if nuke.sample(node, 'rgba.alpha', sx, sy, frame) < 1e-3:\n                            continue\n                    except Exception:\n                        pass\n                r = nuke.sample(node, 'rgba.red',   sx, sy, frame)\n                g = nuke.sample(node, 'rgba.green', sx, sy, frame)\n                b = nuke.sample(node, 'rgba.blue',  sx, sy, frame)\n            except RuntimeError:\n                continue\n            acc_r += r; acc_g += g; acc_b += b; cnt += 1\n\n    if cnt == 0:\n        return None\n    return (acc_r/cnt, acc_g/cnt, acc_b/cnt)\n\n# ----------------- execução -----------------\nn = nuke.thisNode()\nspill_name, (get_spill, set_spill) = _find_spill_knob(n)\nif not set_spill:\n    nuke.message(\"Knobs de spillTweak não encontrados. Ajuste os nomes no script.\")\nelse:\n    viewer_states = _disable_all_viewer_rois()\n    try:\n        # 1) mede com spillTweak = 0,0,0\n        old_r, old_g, old_b = get_spill()\n        set_spill(0.0, 0.0, 0.0)\n\n        # amostra no PRÓPRIO node (o seu Switch/Crop a montante limita a área)\n        mean = _mean_rgb_over_format(n, grid=GRID, use_alpha_mask=False)\n\n        # 2) se falhar, restaura e avisa\n        if not mean:\n            set_spill(old_r, old_g, old_b)\n            nuke.message(\"Não foi possível amostrar pixels válidos no format.\")\n        else:\n            r, g, b = mean\n\n            # 3) aplica a sua fórmula canal a canal\n            kR = -(r / FACTOR)\n            kG = -(g / FACTOR)\n            kB = -(b / FACTOR)\n\n            set_spill(kR, kG, kB)\n    finally:\n        _restore_viewer_rois(viewer_states)\n" +STARTLINE}
+  addUserKnob {26 ""}
+  addUserKnob {26 Credits l "" t "PxF_KillSpill 2.5.4 - &copy; 2011-2023 - Xavier Bourque - pixelfudger.com \n\nPixelfudger gizmos are free to use for personal and commercial use as long as you leave the credit text intact in the gizmo's knobs and in the source files. " +STARTLINE T "<font size=2>PxF_KillSpill 2.5.4 - &copy; 2011-2023 - </font><a href=\"http://www.xavierbourque.com\"><font color=\"#bbbbbb\" size=2>Xavier Bourque</a></font> - <a href=\"http://www.pixelfudger.com\"><font color=\"#bbbbbb\" size=2>pixelfudger.com</a></font> - <a href=\"http://www.pixelfudger.com/userguides/PxF_KillSpill.html\"><font color=\"#bbbbbb\" size=2>Video Tutorial</a></font>"}
+ }
+  Input {
+   inputs 0
+   name mask
+   xpos -228
+   ypos 853
+   number 1
+  }
+  Input {
+   inputs 0
+   name img
+   xpos -496
+   ypos -217
+  }
+  Dot {
+   name Dot3
+   xpos -462
+   ypos -140
+  }
+set N69015000 [stack 0]
+  Dot {
+   name Dot2
+   xpos -689
+   ypos 208
+  }
+  Dot {
+   name Dot4
+   xpos -729
+   ypos 756
+  }
+set N69015800 [stack 0]
+push $N69015000
+  Dot {
+   name Dot1
+   xpos -156
+   ypos 744
+  }
+push $N69015000
+push $N69015000
+  Shuffle {
+   red blue
+   green blue
+   alpha black
+   name Blue
+   xpos 187
+   ypos 28
+  }
+set Nbefbe000 [stack 0]
+push $N69015000
+  Shuffle {
+   red green
+   blue green
+   alpha black
+   name Green
+   xpos 76
+   ypos 26
+  }
+set Nbefbe400 [stack 0]
+push $N69015000
+  Shuffle {
+   green red
+   blue red
+   alpha black
+   name Red
+   xpos -17
+   ypos 27
+  }
+set Nbefbe800 [stack 0]
+  Switch {
+   inputs 3
+   which {{back_color i}}
+   name High
+   xpos -17
+   ypos 132
+  }
+push $Nbefbe400
+push $Nbefbe800
+  Switch {
+   inputs 2
+   which {{"back_color == 0 ? 1 : back_color == 1 ? 0 : 0" i}}
+   name LowA
+   xpos 76
+   ypos 132
+  }
+  Multiply {
+   channels rgba
+   value {{"1 - supp"}}
+   name Multiply1
+   xpos 76
+   ypos 190
+  }
+push $Nbefbe000
+push $Nbefbe400
+push 0
+  Switch {
+   inputs 3
+   which {{"back_color == 0 ? 2 : back_color == 1 ? 2 : 1" i}}
+   name LowB
+   xpos 187
+   ypos 140
+  }
+  Multiply {
+   channels rgba
+   value {{supp}}
+   name Multiply2
+   xpos 187
+   ypos 187
+  }
+  Merge2 {
+   inputs 2
+   operation plus
+   name Merge1
+   xpos 138
+   ypos 299
+  }
+  Multiply {
+   channels rgba
+   value {{masterMult}}
+   name Multiply3
+   xpos 138
+   ypos 327
+  }
+  Merge2 {
+   inputs 2
+   operation min
+   name Merge10
+   xpos -17
+   ypos 371
+  }
+set Nbefbfc00 [stack 0]
+  ShuffleCopy {
+   inputs 2
+   red red
+   green green
+   name ShuffleBlue
+   xpos -426
+   ypos 371
+  }
+push $N69015000
+push $Nbefbfc00
+  ShuffleCopy {
+   inputs 2
+   red red
+   blue blue
+   name ShuffleGreen
+   xpos -526
+   ypos 369
+  }
+push $N69015000
+push $Nbefbfc00
+  ShuffleCopy {
+   inputs 2
+   green green
+   blue blue
+   name ShuffleRed
+   xpos -630
+   ypos 369
+  }
+  Switch {
+   inputs 3
+   which {{back_color i}}
+   name Switch1
+   xpos -526
+   ypos 424
+  }
+set Nbff87700 [stack 0]
+push $N69015000
+push $Nbff87700
+  Merge2 {
+   inputs 2
+   operation minus
+   name Merge9
+   xpos -338
+   ypos 547
+  }
+  Saturation {
+   saturation 0
+   name Saturation1
+   xpos -338
+   ypos 586
+  }
+  ColorCorrect {
+   gain {{SpillTweak.r} {SpillTweak.g} {SpillTweak.b} 1}
+   name ColorCorrect1
+   xpos -338
+   ypos 655
+  }
+  Merge2 {
+   inputs 2
+   operation plus
+   name Merge11
+   xpos -526
+   ypos 655
+  }
+  ShuffleCopy {
+   inputs 2
+   name ShuffleCopy1
+   xpos -526
+   ypos 740
+  }
+  Keymix {
+   inputs 3
+   invertMask true
+   bbox A
+   name Keymix1
+   xpos -526
+   ypos 875
+   disable {{"\[exists parent.input1] ? 0 : 1"}}
+  }
+push $N69015800
+  Dissolve {
+   inputs 2
+   which {{parent.mix}}
+   name Dissolve1
+   xpos -526
+   ypos 946
+  }
+  Output {
+   name Output1
+   xpos -525
+   ypos 1036
+  }
+ end_group
+ Dot {
+  name Dot6
+  xpos 364
+  ypos -759
+ }
+set Nce216c00 [stack 0]
+push $Ncf059400
+ Merge2 {
+  inputs 2
+  operation difference
+  name Merge1
+  xpos 517
+  ypos -762
+ }
+ Dot {
+  name Dot2
+  xpos 551
+  ypos -315
+ }
+set Nce217400 [stack 0]
+ Shuffle2 {
+  fromInput1 {{0} B}
+  fromInput2 {{0} B}
+  mappings "4 rgba.red 0 0 rgba.red 0 0 rgba.red 0 0 rgba.green 0 1 rgba.red 0 0 rgba.blue 0 2 rgba.red 0 0 rgba.alpha 0 3"
+  name RED
+  tile_color 0xff0000ff
+  xpos 376
+  ypos -163
+ }
+push 0
+push $Nce217400
+ Shuffle2 {
+  fromInput1 {{0} B}
+  fromInput2 {{0} B}
+  mappings "4 rgba.green 0 1 rgba.red 0 0 rgba.green 0 1 rgba.green 0 1 rgba.green 0 1 rgba.blue 0 2 rgba.green 0 1 rgba.alpha 0 3"
+  name GREEN
+  tile_color 0xff00ff
+  xpos 517
+  ypos -160
+ }
+push $Nce217400
+ Shuffle2 {
+  fromInput1 {{0} B}
+  fromInput2 {{0} B}
+  mappings "4 rgba.blue 0 2 rgba.red 0 0 rgba.blue 0 2 rgba.green 0 1 rgba.blue 0 2 rgba.blue 0 2 rgba.blue 0 2 rgba.alpha 0 3"
+  name BLUE
+  tile_color 0xffff
+  xpos 655
+  ypos -161
+ }
+ Merge2 {
+  inputs 3+1
+  operation max
+  name Merge2
+  xpos 517
+  ypos -6
+ }
+set Nd073c400 [stack 0]
+ Dot {
+  name Dot5
+  xpos 551
+  ypos 557
+ }
+set Nd073c800 [stack 0]
+ Dot {
+  name Dot9
+  xpos 1699
+  ypos -500
+  hide_input true
+ }
+ Grade {
+  blackpoint 0.22
+  whitepoint 0.42
+  white_clamp true
+  name Grade2
+  xpos 1665
+  ypos -461
+ }
+set Nd073d000 [stack 0]
+ Blur {
+  size 200
+  name Blur1
+  xpos 1665
+  ypos -403
+ }
+set Nd073d400 [stack 0]
+ Dot {
+  name Dot21
+  label Blurred
+  note_font_size 31
+  xpos 1836
+  ypos 1877
+  hide_input true
+ }
+ Dot {
+  name Dot22
+  xpos 1836
+  ypos 1947
+ }
+push $Nd073d000
+ Dot {
+  name Dot19
+  label Luminance
+  note_font_size 31
+  xpos 1648
+  ypos 1876
+  hide_input true
+ }
+ Dot {
+  name Dot20
+  xpos 1648
+  ypos 1947
+ }
+push $Nd073c400
+ Dot {
+  name Dot17
+  label Difference
+  note_font_size 31
+  xpos 1247
+  ypos 1628
+  hide_input true
+ }
+ Dot {
+  name Dot18
+  xpos 1247
+  ypos 1733
+ }
+push $Nce216c00
+ Dot {
+  name Despill
+  label Despill
+  note_font_size 31
+  xpos 1081
+  ypos 1627
+  hide_input true
+ }
+ Dot {
+  name Dot16
+  xpos 1081
+  ypos 1733
+ }
+ Input {
+  inputs 0
+  name mask
+  xpos 1674
+  ypos 1183
+  number 2
+ }
+ Invert {
+  name Invert1
+  xpos 1674
+  ypos 1267
+ }
+push $Ncf059400
+ Dot {
+  name Dot15
+  xpos 1331
+  ypos 1276
+  hide_input true
+ }
+push $Nce216c00
+ Dot {
+  name Dot7
+  xpos 1
+  ypos -759
+ }
+ Grade {
+  name Grade1
+  xpos -33
+  ypos 814
+ }
+ Dot {
+  name Dot8
+  xpos 1
+  ypos 1096
+ }
+push $Nd073c800
+push $Nd073d400
+ Dot {
+  name Dot10
+  xpos 1699
+  ypos -314
+ }
+set Nd2d85000 [stack 0]
+ Shuffle2 {
+  fromInput1 {{0} B}
+  fromInput2 {{0} B}
+  mappings "4 rgba.red 0 0 rgba.red 0 0 rgba.red 0 0 rgba.alpha 0 3 black -1 -1 rgba.green 0 1 black -1 -1 rgba.blue 0 2"
+  name RED1
+  tile_color 0xff0000ff
+  xpos 1571
+  ypos -229
+ }
+push 0
+push $Nd2d85000
+ Shuffle2 {
+  fromInput1 {{0} B}
+  fromInput2 {{0} B}
+  mappings "4 rgba.green 0 1 rgba.green 0 1 rgba.green 0 1 rgba.alpha 0 3 black -1 -1 rgba.blue 0 2 black -1 -1 rgba.red 0 0"
+  name GREEN1
+  tile_color 0xff00ff
+  xpos 1665
+  ypos -228
+ }
+push $Nd2d85000
+ Shuffle2 {
+  fromInput1 {{0} B}
+  fromInput2 {{0} B}
+  mappings "4 black -1 -1 rgba.green 0 1 rgba.blue 0 2 rgba.alpha 0 3 rgba.blue 0 2 rgba.blue 0 2 black -1 -1 rgba.red 0 0"
+  name BLUE1
+  tile_color 0xffff
+  xpos 1761
+  ypos -229
+ }
+ Merge2 {
+  inputs 3+1
+  operation max
+  name Merge5
+  xpos 1665
+  ypos -135
+ }
+ Dot {
+  name Dot11
+  xpos 1699
+  ypos -48
+ }
+set Nae7b4400 [stack 0]
+ Dot {
+  name Dot12
+  xpos 1699
+  ypos 108
+ }
+push $Nae7b4400
+ Input {
+  inputs 0
+  name BG
+  xpos 1465
+  ypos -1612
+ }
+ Dot {
+  name Dot13
+  xpos 1499
+  ypos -1512
+ }
+ Grade {
+  white 2
+  name REVEAL
+  xpos 1465
+  ypos -880
+ }
+ Grade {
+  inputs 1+1
+  white 0.5
+  name Light
+  xpos 1465
+  ypos -51
+ }
+ Grade {
+  inputs 1+1
+  white 2
+  invert_mask true
+  name Shadow
+  xpos 1465
+  ypos 105
+ }
+ Merge2 {
+  inputs 2
+  operation multiply
+  name Merge3
+  xpos 1465
+  ypos 554
+ }
+ Merge2 {
+  inputs 2
+  operation plus
+  name Merge4
+  xpos 1465
+  ypos 1093
+ }
+ Keymix {
+  inputs 3
+  name Keymix1
+  xpos 1465
+  ypos 1267
+  disable {{"\[exists parent.input1] ? 0 : 1"}}
+ }
+set Naea0a800 [stack 0]
+ Switch {
+  inputs 3
+  which {{parent.Viewer_Option}}
+  name Switch1
+  xpos 1465
+  ypos 1730
+ }
+ Switch {
+  inputs 3
+  which {{parent.ViewLuminance}}
+  name Switch2
+  xpos 1465
+  ypos 1944
+ }
+ Dot {
+  name Dot14
+  xpos 1499
+  ypos 2155
+ }
+ Output {
+  name Output1
+  xpos 1465
+  ypos 2208
+ }
+push $Naea0a800
+ Viewer {
+  frame_range 100-134
+  monitorOutNDISenderName "NukeX - teste - Viewer1"
+  name Viewer1
+  xpos 2118
+  ypos 1062
+ }
+end_group
